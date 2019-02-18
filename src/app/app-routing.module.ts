@@ -10,6 +10,8 @@ import { AdminProductsComponent } from 'src/app/components/admin-products/admin-
 import { AdminOrdersComponent } from 'src/app/components/admin-orders/admin-orders.component';
 import { AuthGuard } from 'src/app/services/auth-guard.service';
 import { ProductsComponent } from 'src/app/components/products/products.component';
+import { AdminGuard } from 'src/app/services/admin-guard.service';
+import { NewProductComponent } from 'src/app/components/add-product/new-product.component';
 
 const routes: Routes = [
   {path : '', component :  HomeComponent },
@@ -21,8 +23,21 @@ const routes: Routes = [
   {path : 'order-success',  component : OrderSuccessComponent, canActivate : [AuthGuard]},
   {path : 'my/orders' , component : MyOrdersComponent, canActivate : [AuthGuard]}, 
   
-  {path: 'admin/products' , component : AdminProductsComponent, canActivate : [AuthGuard]},
-  {path: 'admin/orders', component : AdminOrdersComponent, canActivate : [AuthGuard] },
+  {
+    path: 'admin/products' , 
+    component : AdminProductsComponent, 
+    canActivate : [AuthGuard, AdminGuard]
+  },
+  {
+    path: 'admin/products/new' , 
+    component : NewProductComponent, 
+    canActivate : [AuthGuard, AdminGuard]
+  },
+  {
+    path: 'admin/orders', 
+    component : AdminOrdersComponent, 
+    canActivate : [AuthGuard, AdminGuard] 
+  },
   {path : '**', component : HomeComponent}
 ];
 

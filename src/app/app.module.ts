@@ -19,6 +19,9 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthGuard } from 'src/app/services/auth-guard.service';
+import { UserService } from 'src/app/services/user.service';
+import { AdminGuard } from 'src/app/services/admin-guard.service';
+import { NewProductComponent } from 'src/app/components/add-product/new-product.component';
 
 @NgModule({
   declarations: [
@@ -32,19 +35,22 @@ import { AuthGuard } from 'src/app/services/auth-guard.service';
     LoginComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    MyOrdersComponent
+    MyOrdersComponent,
+    NewProductComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'onlineshop-343ee'),
     AngularFireAuthModule,
-    
+    AngularFireDatabaseModule,
     NgbModule.forRoot()
   ],
   providers: [
     AuthService,
-    AuthGuard
+    UserService,
+    AuthGuard,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })
